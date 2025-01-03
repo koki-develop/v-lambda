@@ -12,11 +12,11 @@ pub fn start(handler Handler) ! {
 
 		// Handle the request
 		response := handler(ctx, next_request.body) or {
-			api.failure(ctx.request_id, err)!
+			api.failure(ctx, err)!
 			continue
 		}
 
 		// Send the success response
-		api.success(ctx.request_id, response)!
+		api.success(ctx, response)!
 	}
 }

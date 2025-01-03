@@ -33,9 +33,9 @@ fn (api Api) next() !http.Response {
 }
 
 // https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html#runtimes-api-response
-fn (api Api) success(request_id string, data string) ! {
+fn (api Api) success(ctx Context, data string) ! {
 	// send the response
-	endpoint := 'http://${api.runtime_api}/2018-06-01/runtime/invocation/${request_id}/response'
+	endpoint := 'http://${api.runtime_api}/2018-06-01/runtime/invocation/${ctx.request_id}/response'
 	response := http.post(endpoint, data)!
 
 	// check if the response is ok
@@ -45,9 +45,9 @@ fn (api Api) success(request_id string, data string) ! {
 }
 
 // https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html#runtimes-api-invokeerror
-fn (api Api) failure(request_id string, err IError) ! {
+fn (api Api) failure(ctx Context, err IError) ! {
 	// send the error
-	endpoint := 'http://${api.runtime_api}/2018-06-01/runtime/invocation/${request_id}/error'
+	endpoint := 'http://${api.runtime_api}/2018-06-01/runtime/invocation/${ctx.request_id}/error'
 	body := json.encode({
 		'errorMessage': err.msg()
 		'errorType':    err.type_name()
