@@ -15,9 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: lambda
       - uses: vlang/setup-v@v1
-      - run: v doc -readme -m -f html .
+
+      - name: Generate docs
+        run: |
+          pushd lambda
+          v doc -readme -m -f html .
+          popd
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _docs/
+          path: lambda/_docs/
       - uses: actions/deploy-pages@v4
