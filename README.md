@@ -4,25 +4,16 @@ Libraries to help V developers develop AWS Lambda functions.
 
 ## Installation
 
-Add `v-lambda` to your `v.mod`.
-
-```v
-Module {
-	// ...
-	dependencies: [
-		'https://github.com/koki-develop/v-lambda.git@0.1.0'
-	]
-}
+```console
+$ v install koki-develop.lambda
 ```
-
-And run `v install`.
 
 ## Usage
 
 ```v
 module main
 
-import lambda
+import koki_develop.lambda
 import json
 
 struct Input {
