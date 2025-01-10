@@ -22,7 +22,7 @@ jobs:
       - name: Generate docs
         run: |
           pushd lambda
-          v doc -m -f html .
+          v doc -readme -m -f html .
           popd
 
       - uses: actions/upload-pages-artifact@v3
